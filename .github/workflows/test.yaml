@@ -1,7 +1,6 @@
 name: Test
 
 on:
-  push: { main }
   pull_request: {}
 
 jobs:
@@ -19,4 +18,4 @@ jobs:
           check-latest: true
       
       - name: Run Tests
-        run: go test
+        run: go test ./...
