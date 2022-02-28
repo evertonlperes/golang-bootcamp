@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"math/rand"
+	"os"
 	"strings"
 )
 
@@ -40,11 +43,44 @@ func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
 
-// Helper deck to string, before convert it to byte slice
+// Helper: Convert deck to string
 func (d deck) toString() string {
 
 	// convert d to type string slice
 	// and separate it by comma
 	return strings.Join([]string(d), ",")
 
+}
+
+// Save cards into a file
+func (d deck) saveToFile(filename string) error {
+	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+}
+
+// Read the cards from saved file
+// and return a new Deck
+func newDeckFromFile(filename string) deck {
+	//bs = byteSlice
+	bs, err := ioutil.ReadFile(filename)
+	if err != nil {
+		// Option #2 - log the error and entirely quit the program
+		fmt.Println("Error --> ", err)
+		os.Exit(1)
+	}
+
+	// convert byteSlice to string and attribute it to 's'
+	s := strings.Split(string(bs), ",")
+	// convert 's' to a deck
+	return deck(s)
+}
+
+// Shuffle the cards
+func (d deck) shuffle() {
+	for i := range d {
+		// np = new position
+		// random set number based on the size of the string slice
+		np := rand.Intn(len(d) - 1)
+		// move elements into the array
+		d[i], d[np] = d[np], d[i]
+	}
 }
