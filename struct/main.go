@@ -11,21 +11,20 @@ type contactInfo struct {
 // Define the struct: person
 type person struct {
 	firstName string
-	lastNAme  string
+	lastName  string
 	contact   contactInfo
 }
 
 func main() {
-	// # First way to use struct
-	// wicks := person{firstName: "Wicks", lastNAme: "Testing"}
-	// fmt.Println(wicks)
 
-	// # Second way
-	var wicks person
+	wicks := person{
+		firstName: "Wicks",
+		lastName:  "Testing",
+		contact: contactInfo{
+			email:   "test@gmail.com",
+			zipCode: "9000",
+		},
+	}
 
-	wicks.firstName = "Wicks"
-	wicks.lastNAme = "Testing"
-
-	fmt.Println(wicks)       //output: { }
-	fmt.Printf("%+v", wicks) // output: {firstName: lastNAme:}%
+	fmt.Printf("%+v", wicks)
 }
