@@ -26,8 +26,7 @@ func main() {
 		},
 	}
 
-	wicksPointer := &wicks // &: give the memory address fo the value this variable is pointing at
-	wicksPointer.updateName("Aloww")
+	wicks.updateName("Aloww")
 	wicks.print()
 
 }
