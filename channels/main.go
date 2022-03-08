@@ -25,8 +25,8 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	for i := 0; i < len(links); i++ {
-		fmt.Println(<-c) //print the message received from the channel
+	for {
+		checkLink(<-c, c)
 	}
 }
 
